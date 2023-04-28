@@ -10,5 +10,5 @@ $logFile = "$env:temp\WindowsUpdate.log"
 # Format the list of updates as a table and save it to the log file
 $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Encoding UTF8
 
-# Display a message indicating that the script has completed
-Write-Host "Windows update check completed. Results saved to $logFile."
+# Upload the log file to Intune
+Set-CMDeviceConfigurationScriptResult -ScriptOutput $logFile
