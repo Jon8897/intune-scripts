@@ -33,7 +33,7 @@ Here are some of the scripts included in this repository:
 If you have a script that you think would be useful for other Intune users, feel free to contribute it to this repository. To contribute a script, create a new file in the scripts directory with a descriptive name and the .ps1 extension. Please also include a brief description of the script in the README file.
 
 ### License
-This repository is licensed under the MIT License. Please see the LICENSE file for details.
+None
 
 # Disclaimer # 
 These scripts are provided as-is and without warranty or support. It is your responsibility to test and validate these scripts before using them in a production environment. Use at your own risk.

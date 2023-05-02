@@ -34,7 +34,7 @@ Note that uploading the log file to Intune may incur additional costs for storag
 If you have a script that you think would be useful for other Intune users, feel free to contribute it to this repository. To contribute a script, create a new file in the scripts directory with a descriptive name and the .ps1 extension. Please also include a brief description of the script in the README file.
 
 ### License
-This repository is licensed under the MIT License. Please see the LICENSE file for details.
+None
 
 # Disclaimer #
 
