@@ -11,4 +11,4 @@ $logFile = "$env:temp\WindowsUpdate.log"
 $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Encoding UTF8
 
 # Upload the log file to Intune
-Set-CMDeviceConfigurationScriptResult -ScriptOutput $logFile
+Set-Content -Path "C:\Users\jonathankeefe.ASTONBERKELEY\OneDrive - Aston Berkeley Systems Ltd\Desktop\Projects\git-projects\intune-scripts\Windows-update-checker\WindowsUpdate.log" -Value (Get-Content $logFile -Raw) -Encoding UTF8
