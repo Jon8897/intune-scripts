@@ -35,15 +35,20 @@ if ($updates) {
     # Update the loading bar
     Write-Progress -Activity "Checking for Windows updates..." -Status "Completed" -PercentComplete 100 -Completed
 
-    # Display success message
-    Write-Host "Windows updates checked successfully. Please check the log file for details."
+   # Display success message with current date and time
+   $logMessage = "Windows updates checked successfully at $(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Please check the log file for details."
+   Write-Host $logMessage
+
+   # Write the log message to the log file
+   Add-Content -Path $logFile -Value $logMessage
 } else {
     # Write "Update not needed" to the log file
     "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
 
-    # Upload the log file to Intune
-    Set-Content -Path $logFile -Value "Update not needed" -Encoding UTF8
+    # Display success message with current date and time
+    $logMessage = "No Windows updates needed at $(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Please check the log file for details."
+    Write-Host $logMessage
 
-    # Display success message
-    Write-Host "No Windows updates needed. Please check the log file for details."
+    # Write the log message to the log file
+    Add-Content -Path $logFile -Value $logMessag
 }
