@@ -21,9 +21,3 @@ if ($updates) {
     # Upload the log file to Intune
     Set-Content -Path "$env:USERPROFILE\Desktop\WindowsUpdate.log" -Value "Update not needed" -Encoding UTF8
 }
-
-# Format the list of updates as a table and save it to the log file
-$updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Encoding UTF8
-
-# Upload the log file to Intune
-Set-Content -Path "$env:USERPROFILE\Desktop\WindowsUpdate.log" -Value (Get-Content $logFile -Raw) -Encoding UTF8
