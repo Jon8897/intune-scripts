@@ -1,3 +1,5 @@
+Import-Module -Name PSWindowsUpdate
+
 # Check for Windows updates with the specified installation results
 $installationResults = 'Failed', 'SucceededWithErrors'
 $updates = Get-WUList -WindowsUpdate
