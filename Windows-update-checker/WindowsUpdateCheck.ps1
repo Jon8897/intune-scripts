@@ -35,18 +35,18 @@ if ($updates) {
     # Update the loading bar
     Write-Progress -Activity "Checking for Windows updates..." -Status "Completed" -PercentComplete 100 -Completed -Verbose
 
-   # Display success message with current date and time
-   $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Windows updates checked successfully at"
+   # Display success message
+   $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Windows updates checked successfully. Please check the log file for details."
    Write-Host $logMessage
 
    # Write the log message to the log file
    Add-Content -Path $logFile -Value $logMessage
 } else {
     # Write "Update not needed" to the log file
-    "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
+    "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
 
-    # Display success message with current date and time
-    $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). No Windows updates needed at"
+    # Display success message
+    $logMessage = "No Windows updates needed. Please check the log file for details."
     Write-Host $logMessage
 
     # Write the log message to the log file
