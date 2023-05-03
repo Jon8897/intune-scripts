@@ -8,6 +8,7 @@ if (!(Get-Module -Name PSWindowsUpdate)) {
         Exit
     }
 }
+
 # Import the PSWindowsUpdate module
 Import-Module -Name PSWindowsUpdate
 
