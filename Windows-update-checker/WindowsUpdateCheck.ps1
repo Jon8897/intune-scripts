@@ -42,12 +42,12 @@ if ($updates) {
    # Write the log message to the log file
    Add-Content -Path $logFile -Value $logMessage
 } else {
+    # Write "Update not needed" to the log file
+    "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
+
     # Display success message with current date and time
     $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). No Windows updates needed at"
     Write-Host $logMessage
-
-    # Write "Update not needed" to the log file
-    "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
 
     # Write the log message to the log file
     Add-Content -Path $logFile -Value $logMessage
