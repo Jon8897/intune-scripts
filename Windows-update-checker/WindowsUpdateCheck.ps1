@@ -20,17 +20,17 @@ $updates = Get-WUList -WindowsUpdate
 $updates = $updates | Where-Object { $installationResults -contains $_.Result }
 
 # Define the path to the log file
-$logFile = "$env:Desktop\WindowsUpdate.log"
+$logFile = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log"
 
 if ($updates) {
     # Create a loading bar
     Write-Progress -Activity "Checking for Windows updates..." -Status "Please wait..." -PercentComplete 0
 
-    # Format the list of updates as a table and save it to the log file
-    $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Encoding UTF8
+    # Format the list of updates as a table and append it to the log file
+    $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Append -Encoding UTF8
 
     # Upload the log file to Intune
-    Set-Content -Path "$env:USERPROFILE\Desktop\WindowsUpdate.log" -Value (Get-Content $logFile -Raw) -Encoding UTF8
+    Set-Content -Path $logFile -Value (Get-Content $logFile -Raw) -Encoding UTF8
 
     # Update the loading bar
     Write-Progress -Activity "Checking for Windows updates..." -Status "Completed" -PercentComplete 100 -Completed
@@ -39,10 +39,10 @@ if ($updates) {
     Write-Host "Windows updates checked successfully. Please check the log file for details."
 } else {
     # Write "Update not needed" to the log file
-    "Update not needed" | Out-File -FilePath $logFile -Encoding UTF8
+    "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
 
     # Upload the log file to Intune
-    Set-Content -Path "$env:USERPROFILE\Desktop\WindowsUpdate.log" -Value "Update not needed" -Encoding UTF8
+    Set-Content -Path $logFile -Value "Update not needed" -Encoding UTF8
 
     # Display success message
     Write-Host "No Windows updates needed. Please check the log file for details."
