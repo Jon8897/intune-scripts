@@ -1,8 +1,13 @@
-# Check if the PSWindowsUpdate module is installed, and install it if it's not
-if (-not (Get-Module -Name PSWindowsUpdate -ListAvailable)) {
-    Install-Module PSWindowsUpdate -Scope CurrentUser -Force
-}
+# Install PSWindowsUpdate module if not already installed
+if (!(Get-Module -Name PSWindowsUpdate)) {
+    Install-Module PSWindowsUpdate -Force
 
+    # Check if the module was installed successfully
+    if (!(Get-Module -Name PSWindowsUpdate)) {
+        Write-Host "Failed to install PSWindowsUpdate module. Please try again later."
+        Exit
+    }
+}
 # Import the PSWindowsUpdate module
 Import-Module -Name PSWindowsUpdate
 
