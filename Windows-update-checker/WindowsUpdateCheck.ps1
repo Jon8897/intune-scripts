@@ -24,7 +24,7 @@ $logFile = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdat
 
 if ($updates) {
     # Create a loading bar
-    Write-Progress -Activity "Checking for Windows updates..." -Status "Please wait..." -PercentComplete 0
+    Write-Progress -Activity "Checking for Windows updates..." -Status "Please wait..." -PercentComplete 0 -Verbose
 
     # Format the list of updates as a table and append it to the log file
     $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Append -Encoding UTF8
@@ -33,10 +33,10 @@ if ($updates) {
     Set-Content -Path $logFile -Value (Get-Content $logFile -Raw) -Encoding UTF8
 
     # Update the loading bar
-    Write-Progress -Activity "Checking for Windows updates..." -Status "Completed" -PercentComplete 100 -Completed
+    Write-Progress -Activity "Checking for Windows updates..." -Status "Completed" -PercentComplete 100 -Completed -Verbose
 
    # Display success message with current date and time
-   $logMessage = "Windows updates checked successfully at $(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Please check the log file for details."
+   $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Windows updates checked successfully at"
    Write-Host $logMessage
 
    # Write the log message to the log file
@@ -46,9 +46,9 @@ if ($updates) {
     "Update not needed" | Out-File -FilePath $logFile -Append -Encoding UTF8
 
     # Display success message with current date and time
-    $logMessage = "No Windows updates needed at $(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). Please check the log file for details."
+    $logMessage = "$(Get-Date -Format 'yyyy/MM/dd HH:mm:ss'). No Windows updates needed at"
     Write-Host $logMessage
 
     # Write the log message to the log file
-    Add-Content -Path $logFile -Value $logMessag
+    Add-Content -Path $logFile -Value $logMessage
 }

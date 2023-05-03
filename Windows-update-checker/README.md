@@ -3,6 +3,11 @@ This PowerShell script checks for Windows updates with installation results of '
 
 #### to run Invoke-Expression .\WindowsUpdateCheck.ps1
 
+## Path to find log 
+<pre>
+C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log
+</pre>
+
 ## Prerequisites
 To use this script, you will need to have the following:
 
