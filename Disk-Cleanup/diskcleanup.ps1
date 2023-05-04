@@ -1,6 +1,6 @@
 # Set up the cleanup flags
 $CleanupFlags = @{
-    "DownloadedProgramFiles" = $True
+    "DownloadedProgramFiles" = $false
     "TemporaryInternetFiles" = $True
     "Thumbnails" = $True
     "RecycleBin" = $True
