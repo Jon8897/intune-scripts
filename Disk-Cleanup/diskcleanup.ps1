@@ -5,8 +5,8 @@ $CleanupFlags = @{
     "Thumbnails" = $True
     "RecycleBin" = $True
     "TemporaryFiles" = $True
-    "DeliveryOptimizationFiles" = $True
-    "SetupLogFiles" = $True
+    "DeliveryOptimizationFiles" = $false
+    "SetupLogFiles" = $false
 }
 
 # Display a popup message to the user indicating that the cleanup is in progress
