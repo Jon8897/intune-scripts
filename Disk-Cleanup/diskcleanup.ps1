@@ -30,7 +30,8 @@ $CleanupProvider.CleanupImage("/StartComponentCleanup /ResetBase", $CleanupFlags
 $CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
 
 # Display a popup message to the user indicating that the cleanup is complete
-$CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
+[Microsoft.VisualBasic.Interaction]::AppActivate("Disk Cleanup")
+[Microsoft.VisualBasic.Interaction]::MsgBox("Disk Cleanup completed successfully.", [Microsoft.VisualBasic.MsgBoxStyle]::Information, "Disk Cleanup")
 
 # Create a log file in the user's temp directory, and add a log entry with the current date and time
 $LogFile = "$env:TEMP\DiskCleanup.log"
