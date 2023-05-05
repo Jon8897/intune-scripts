@@ -1,23 +1,5 @@
-# Install PSWindowsUpdate module if not already installed
-if (!(Get-Module -Name PSWindowsUpdate)) {
-    Install-Module PSWindowsUpdate -Force
-
-    # Check if the module was installed successfully
-    if (!(Get-Module -Name PSWindowsUpdate)) {
-        Write-Host "Failed to install PSWindowsUpdate module. Please try again later."
-        Exit
-    }
-}
-
-# Import the PSWindowsUpdate module
-Import-Module -Name PSWindowsUpdate
-
-# Check for Windows updates with the specified installation results
-$installationResults = 'Failed', 'SucceededWithErrors'
-$updates = Get-WUList -WindowsUpdate
-
-# Filter the list of updates based on the installation results
-$updates = $updates | Where-Object { $installationResults -contains $_.Result }
+# Check for updates using Windows Update settings
+$updates = Get-WindowsUpdate -MaxUpdatesPerDownload 100 -Download -Install
 
 # Define the path to the log file
 $logFile = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log"
