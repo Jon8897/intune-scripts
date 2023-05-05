@@ -1,5 +1,5 @@
 # Check for updates using Windows Update settings
-$updates = Get-WindowsUpdate -MaxUpdatesPerDownload 100 -Download -Install
+$updates = Get-WindowsUpdate -AcceptAll -Download -Install
 
 # Define the path to the log file
 $logFile = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log"
