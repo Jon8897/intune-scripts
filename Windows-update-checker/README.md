@@ -24,6 +24,13 @@ The changes made to the code include:
 - Removing the code that installs the PSWindowsUpdate module
 - Updating the log message to reflect that the script is checking for updates using the Windows Update settings
 - Updating the loading bar to reflect the changes in the code
+- Updated the script to check for updates using Windows Update settings instead of downloading them directly.
+- Removed the MaxUpdatesPerDownload parameter from the Get-WindowsUpdate cmdlet to avoid errors when running the script without admin privileges.
+- Updated the script to check the Windows Update auto-download setting before running.
+- Added a message to indicate whether updates were checked or not in the log file.
+- Added a loading bar to show progress while checking for updates.
+- Removed the installation of updates to prevent unintended changes to the system.
+- Fixed file permission errors that occurred when writing to the log file.
 
 ## How to Use
 To use this script, save the code to a PowerShell script file (e.g., WindowsUpdateCheck.ps1) and run it from an elevated PowerShell prompt. The script will check for updates using the Windows Update settings on the local machine and log any updates that are needed to a log file located at "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log".
