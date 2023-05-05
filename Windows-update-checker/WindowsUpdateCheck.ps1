@@ -9,7 +9,7 @@ if ($updates) {
     Write-Progress -Activity "Checking for Windows updates..." -Status "Please wait..." -PercentComplete 0 -Verbose
 
     # Format the list of updates as a table and append it to the log file
-    $updates | Format-Table -AutoSize | Out-File -FilePath $logFile -Append -Encoding UTF8
+    $updates | Select-Object @{Name="Time";Expression={Get-Date -Format 'yyyy/MM/dd HH:mm:ss'}},ComputerName,Result,KB,Size,Title | Format-Table -AutoSize | Out-File -FilePath $logFile -Append -Encoding UTF8
 
     # Upload the log file to Intune
     Set-Content -Path $logFile -Value (Get-Content $logFile -Raw) -Encoding UTF8
