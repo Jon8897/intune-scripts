@@ -15,6 +15,21 @@ To use this script, you will need to have the following:
 - Access to the Microsoft Endpoint Manager admin center
 - PowerShell version 5.1 or later
 
+## Changes Made
+Previously, this script required the installation of the PSWindowsUpdate module to check for updates. This made it challenging to use the script in an Intune environment where installing additional modules can be challenging. In this version of the script, the PSWindowsUpdate module has been removed, and the code has been updated to use the Windows Update settings on the local machine to check for updates.
+
+The changes made to the code include:
+
+- Replacing the Get-WUList cmdlet with Get-WindowsUpdate to check for updates using the Windows Update settings on the local machine
+- Removing the code that installs the PSWindowsUpdate module
+- Updating the log message to reflect that the script is checking for updates using the Windows Update settings
+- Updating the loading bar to reflect the changes in the code
+
+## How to Use
+To use this script, save the code to a PowerShell script file (e.g., WindowsUpdateCheck.ps1) and run it from an elevated PowerShell prompt. The script will check for updates using the Windows Update settings on the local machine and log any updates that are needed to a log file located at "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WindowsUpdate.log".
+
+This script can be used in an Intune environment without the need to install additional modules. To use it in Intune, upload the script to Intune and create a PowerShell script deployment policy. When the policy is applied to a device, the script will run, and the log file will be uploaded to Intune for review.
+
 ## Usage
 To use this script, follow these steps:
 
