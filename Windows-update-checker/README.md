@@ -30,6 +30,15 @@ To use this script, save the code to a PowerShell script file (e.g., WindowsUpda
 
 This script can be used in an Intune environment without the need to install additional modules. To use it in Intune, upload the script to Intune and create a PowerShell script deployment policy. When the policy is applied to a device, the script will run, and the log file will be uploaded to Intune for review.
 
+## Issues
+
+#### 05/05/2023 ####
+Firstly, the parameter MaxUpdatesPerDownload is not supported by the Get-WindowsUpdate cmdlet. This is causing the error message: "A parameter cannot be found that matches parameter name 'MaxUpdatesPerDownload'."
+
+Secondly, there is an access denied error when attempting to write to the log file. This suggests that the user running the script does not have permission to write to that location.
+
+To fix these issues, you could remove the MaxUpdatesPerDownload parameter and modify the code to write to a location that the user running the script has permission to access.
+
 ## Usage
 To use this script, follow these steps:
 
