@@ -33,11 +33,13 @@ This script can be used in an Intune environment without the need to install add
 ## Issues
 
 #### 05/05/2023 ####
-~Firstly, the parameter MaxUpdatesPerDownload is not supported by the Get-WindowsUpdate cmdlet. This is causing the error message: "A parameter cannot be found that matches parameter name 'MaxUpdatesPerDownload'."~
+- ~~Firstly, the parameter MaxUpdatesPerDownload is not supported by the Get-WindowsUpdate cmdlet. This is causing the error message: "A parameter cannot be found that matches parameter name 'MaxUpdatesPerDownload'."~~
 
-Secondly, there is an access denied error when attempting to write to the log file. This suggests that the user running the script does not have permission to write to that location.
+- ~~Secondly, there is an access denied error when attempting to write to the log file. This suggests that the user running the script does not have permission to write to that location.~~
 
-To fix these issues, you could remove the MaxUpdatesPerDownload parameter and modify the code to write to a location that the user running the script has permission to access.
+- ~~To fix these issues, you could remove the MaxUpdatesPerDownload parameter and modify the code to write to a location that the user running the script has permission to access.~~
+
+- Runs and works issue is the format of log date and time show after update been made
 
 ## Usage
 To use this script, follow these steps:
