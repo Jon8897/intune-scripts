@@ -49,7 +49,7 @@ I have connected this to the Intune scripts section and the results are as shown
 
 <img src="imgs/windows-update-checker-status.png">
 
-### Results
+### Results:
 
 <img src="imgs/update-checker-results.png">
 
