@@ -43,15 +43,15 @@ I have connected this to the Intune scripts section and the results are as shown
 
 ### device | scripts:
 
-<img src="imgs/device-scripts.png">
+<img src="imgs/Device-scripts.png">
 
 ### Status:
 
-<img src="imgs/windows-update-checker-status.png">
+<img src="imgs/Update-checker-status.png">
 
 ### Results:
 
-<img src="imgs/update-checker-results.png">
+<img src="imgs/Update-checker-results.png">
 
 ## Issues
 
