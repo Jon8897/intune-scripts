@@ -46,7 +46,6 @@ try {
 
     # Create a DISM session and component
     $CleanupManager = New-Object -ComObject "Dism.DismManager"
-    $CleanupSession = $CleanupManager.CreateSession()
 
     # Clear any pending cleanup operations
     $CleanupProvider = $CleanupManager.CreateComponent("Cleanup-Image")
