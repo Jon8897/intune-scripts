@@ -44,21 +44,24 @@ try {
     $LogEntry = "$DateTime - Disk Cleanup started.`r`n"
     Add-Content -Path $LogPath -Value $LogEntry
 
-    # Create a DISM session and component
-    $CleanupManager = New-Object -ComObject "Dism.DismManager"
-
-    # Clear any pending cleanup operations
-    $CleanupProvider = $CleanupManager.CreateComponent("Cleanup-Image")
-    $CleanupProvider.RevertPendingActions()
-
-    # Perform the Disk Cleanup operation using the cleanup flags
-    $CleanupProvider.CleanupImage("/StartComponentCleanup /ResetBase", $CleanupFlags)
-    $CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
-
-    # Write a log entry with the current date and time
-    $DateTime = Get-Date
-    $LogEntry = "$DateTime - Disk Cleanup completed successfully.`r`n"
-    Add-Content -Path $LogPath -Value $LogEntry
+    # Clean up each specified folder and log the result
+    foreach ($flag in $CleanupFlags.Keys) {
+        if ($CleanupFlags[$flag]) {
+            Write-Host "Cleaning up $flag"
+            $Folder = Join-Path -Path $env:USERPROFILE -ChildPath $flag
+            if (Test-Path $Folder) {
+                Remove-Item -Path $Folder -Recurse -Force -ErrorAction SilentlyContinue
+                if (-not (Test-Path $Folder)) {
+                    $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                    Add-Content -Path $LogPath -Value $LogEntry
+                }
+                else {
+                    $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                    Add-Content -Path $LogPath -Value $LogEntry
+                }
+            }
+        }
+    }
 
     # Display a popup message to the user indicating that the cleanup is complete
     $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
