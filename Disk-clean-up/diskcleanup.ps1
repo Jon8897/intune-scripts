@@ -13,14 +13,8 @@ $CleanupFlags = @{
 $CleanupOptions = New-Object -ComObject "WScript.Shell"
 $CleanupOptions.Popup("Performing Disk Cleanup. Please wait...", 0, "Disk Cleanup", 64)
 
-# Create a DISM session and component, and configure the log file location and verbosity
-$CleanupManager = New-Object -ComObject "Dism.DismManager"
-$CleanupSession = $CleanupManager.CreateSession()
-
-$CleanupSession.LogPath = "C:\Windows\Logs\DISM\dism.log"
-$CleanupSession.LogLevel = 1
-
-$CleanupProvider = $CleanupManager.CreateComponent("Cleanup-Image")
+# Set the log file path
+$LogPath = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log"
 
 # Clear any pending cleanup operations
 $CleanupProvider.RevertPendingActions()
