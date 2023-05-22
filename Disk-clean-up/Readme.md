@@ -29,4 +29,11 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-###### Removing DISM as causing to many un-fixable  errors. ######
+#### Removing DISM as causing to many un-fixable  errors. ####S
+
+##### TEST 1 ##### 
+
+###### 22/05/2023 ######
+
+- 05/22/2023 17:07:12 - Disk Cleanup started.
+  - so far has been successful
