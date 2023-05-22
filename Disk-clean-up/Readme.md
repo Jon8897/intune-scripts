@@ -29,4 +29,12 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-If you encounter any issues or errors while running the script, please ensure that you have the necessary permissions to perform disk cleanup and that the required COM objects are registered on your system.
+1. Ensure that you are running the script with administrative privileges. Right-click on PowerShell and choose "Run as administrator" before executing the script.
+
+2. Make sure that the necessary dependencies and prerequisites for DISM are installed on your system. DISM is a built-in Windows component, but it may require additional components or updates. You can try updating your Windows system to the latest version.
+
+3. Check if the DISM component is registered on your system. Open PowerShell and run the following command to check if the COM class is registered:
+<pre>
+[System.Runtime.InteropServices.Marshal]::IsComObject([Dism.DismManager])
+</pre>
+If the command returns False, it means the COM class is not registered. In that case, you may need to repair or reinstall the Windows operating system to restore the missing COM classes.
