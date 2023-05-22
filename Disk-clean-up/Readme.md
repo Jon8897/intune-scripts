@@ -29,19 +29,14 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-The error message you received indicates that the COM class factory for the component with CLSID {00000000-0000-0000-0000-000000000000} failed to retrieve because it is not registered. This error is typically caused by a missing or improperly registered component.
+The error message encountered suggests that the COM class factory for the specified component is still not registered properly. It's possible that there may be other dependencies or issues preventing the successful registration of the component.
 
-In your case, it seems that the required COM component for Disk Cleanup is not registered on your system. This could be due to various reasons, such as a corrupted installation or missing system files.
+Here are a few suggestions you can try:
 
-To resolve this issue, you can try the following steps:
+1. Ensure that you are running the commands to register the DLL files with administrative privileges. Right-click on the Command Prompt or PowerShell and choose "Run as administrator" before executing the registration commands.
 
-1. Open an elevated Command Prompt by right-clicking on the Command Prompt icon and selecting "Run as administrator."
-2. Open an elevated PowerShell session by right-clicking on PowerShell and selecting "Run as administrator".
-<pre>
-regsvr32 /s DismCore.dll
-regsvr32 /s DismCorePS.dll
-regsvr32 /s DismHost.exe
-regsvr32 /s DismProv.dll
-</pre>
-3. After running the commands, restart your computer to ensure the changes take effect.
-4. Once your system has restarted, try running the Disk Cleanup script again to see if the issue is resolved.
+2. Verify that the DLL files (DismCore.dll, DismCorePS.dll, DismHost.exe, DismProv.dll) are located in the correct directories (SysNative and System32 folders) and that they are not corrupted or missing.
+
+3. Check if there are any antivirus or security software on your system that might be interfering with the registration process. Temporarily disable them and try registering the DLL files again.
+
+4. Ensure that your system is up to date with the latest Windows updates. Some updates may include fixes for COM-related issues.
