@@ -16,20 +16,29 @@ $CleanupOptions.Popup("Performing Disk Cleanup. Please wait...", 0, "Disk Cleanu
 # Set the log file path
 $LogPath = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log"
 
-# Clear any pending cleanup operations
-$CleanupProvider.RevertPendingActions()
+try {
+    # Create or append to the log file
+    $DateTime = Get-Date
+    $LogEntry = "$DateTime - Disk Cleanup started.`r`n"
+    Add-Content -Path $LogPath -Value $LogEntry
 
-# Perform the Disk Cleanup operation using the cleanup flags
-$CleanupProvider.CleanupImage("/StartComponentCleanup /ResetBase", $CleanupFlags)
-$CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
+    # Create a DISM session and component
+    $CleanupManager = New-Object -ComObject "Dism.DismManager"
+    $CleanupSession = $CleanupManager.CreateSession()
 
-# Display a popup message to the user indicating that the cleanup is complete
-$CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
+    # Clear any pending cleanup operations
+    $CleanupProvider = $CleanupManager.CreateComponent("Cleanup-Image")
+    $CleanupProvider.RevertPendingActions()
 
-# Create a log file in the user's temp directory, and add a log entry with the current date and time
-$LogFile = "$env:TEMP\DiskCleanup.log"
-$DateTime = Get-Date
-$LogEntry = "$DateTime - Disk Cleanup completed.`r`n"
+    # Perform the Disk Cleanup operation using the cleanup flags
+    $CleanupProvider.CleanupImage("/StartComponentCleanup /ResetBase", $CleanupFlags)
+    $CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
 
-# Append the log entry to the log file
-Add-Content -Path $LogFile -Value $LogEntry
+    # Write a log entry with the current date and time
+    $DateTime = Get-Date
+    $LogEntry = "$DateTime - Disk Cleanup completed successfully.`r`n"
+    Add-Content -Path $LogPath -Value $LogEntry
+
+    # Display a popup message to the user indicating that the cleanup is complete
+    $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
+}
