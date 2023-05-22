@@ -29,14 +29,4 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-The error message encountered suggests that the COM class factory for the specified component is still not registered properly. It's possible that there may be other dependencies or issues preventing the successful registration of the component.
-
-Here are a few suggestions you can try:
-
-1. Ensure that you are running the commands to register the DLL files with administrative privileges. Right-click on the Command Prompt or PowerShell and choose "Run as administrator" before executing the registration commands.
-
-2. Verify that the DLL files (DismCore.dll, DismCorePS.dll, DismHost.exe, DismProv.dll) are located in the correct directories (SysNative and System32 folders) and that they are not corrupted or missing.
-
-3. Check if there are any antivirus or security software on your system that might be interfering with the registration process. Temporarily disable them and try registering the DLL files again.
-
-4. Ensure that your system is up to date with the latest Windows updates. Some updates may include fixes for COM-related issues.
+###### Removing DISM as causing to many un-fixable  errors. ######
