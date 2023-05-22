@@ -62,7 +62,7 @@ I have connected this to the Intune scripts section and the results are as shown
 
 - ~~To fix these issues, you could remove the MaxUpdatesPerDownload parameter and modify the code to write to a location that the user running the script has permission to access.~~
 
-- ~~ Runs and works issue is the format of log date and time show after update been made ~~
+- ~~Runs and works issue is the format of log date and time show after update been made~~
 
 ## Usage
 To use this script, follow these steps:
