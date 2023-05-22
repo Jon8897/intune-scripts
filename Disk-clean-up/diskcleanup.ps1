@@ -31,3 +31,11 @@ $CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
 
 # Display a popup message to the user indicating that the cleanup is complete
 $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
+
+# Create a log file in the user's temp directory, and add a log entry with the current date and time
+$LogFile = "$env:TEMP\DiskCleanup.log"
+$DateTime = Get-Date
+$LogEntry = "$DateTime - Disk Cleanup completed.`r`n"
+
+# Append the log entry to the log file
+Add-Content -Path $LogFile -Value $LogEntry
