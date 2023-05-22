@@ -21,3 +21,13 @@ $CleanupSession.LogPath = "C:\Windows\Logs\DISM\dism.log"
 $CleanupSession.LogLevel = 1
 
 $CleanupProvider = $CleanupManager.CreateComponent("Cleanup-Image")
+
+# Clear any pending cleanup operations
+$CleanupProvider.RevertPendingActions()
+
+# Perform the Disk Cleanup operation using the cleanup flags
+$CleanupProvider.CleanupImage("/StartComponentCleanup /ResetBase", $CleanupFlags)
+$CleanupProvider.CleanupImage("/ResetBase", $CleanupFlags)
+
+# Display a popup message to the user indicating that the cleanup is complete
+$CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
