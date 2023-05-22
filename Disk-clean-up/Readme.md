@@ -29,12 +29,39 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-1. Ensure that you are running the script with administrative privileges. Right-click on PowerShell and choose "Run as administrator" before executing the script.
+The error message you encountered indicates that the COM class factory for the component with CLSID {00000000-0000-0000-0000-000000000000} could not be retrieved. This error is typically caused by the component not being registered on your system.
 
-2. Make sure that the necessary dependencies and prerequisites for DISM are installed on your system. DISM is a built-in Windows component, but it may require additional components or updates. You can try updating your Windows system to the latest version.
+In the case of the Disk Cleanup script using the DISM (Deployment Image Servicing and Management) tool, the COM component is required for performing the cleanup operations.
 
-3. Check if the DISM component is registered on your system. Open PowerShell and run the following command to check if the COM class is registered:
+To resolve this issue, you can try the following steps:
+
+1. Make sure you are running the script on a Windows operating system.
+2. Open an elevated PowerShell session by right-clicking on PowerShell and selecting "Run as administrator".
+3. Check if the necessary DLLs (Dynamic-Link Libraries) for DISM are registered correctly by running the following commands:
 <pre>
-[System.Runtime.InteropServices.Marshal]::IsComObject([Dism.DismManager])
+# Register DISM DLLs
+$WinDir = $env:windir
+$SysNativeFolder = Join-Path -Path $WinDir -ChildPath 'SysNative'
+$System32Folder = Join-Path -Path $WinDir -ChildPath 'System32'
+
+# Register the DLLs from the SysNative folder
+$DismDLLs = @('DismCore.dll', 'DismCorePS.dll', 'DismHost.exe', 'DismProv.dll')
+$DismDLLs | ForEach-Object {
+    $DllPath = Join-Path -Path $SysNativeFolder -ChildPath $_
+    if (Test-Path $DllPath) {
+        regsvr32 /s $DllPath
+    }
+}
+
+# Register the DLLs from the System32 folder
+$DismDLLs | ForEach-Object {
+    $DllPath = Join-Path -Path $System32Folder -ChildPath $_
+    if (Test-Path $DllPath) {
+        regsvr32 /s $DllPath
+    }
+}
 </pre>
-If the command returns False, it means the COM class is not registered. In that case, you may need to repair or reinstall the Windows operating system to restore the missing COM classes.
+
+4. After running the above commands, try running the Disk Cleanup script again to see if the error is resolved.
+
+If the issue persists, it's possible that there may be other underlying issues with the DISM component or your system configuration. In such cases, you may need to troubleshoot further or consider alternative disk cleanup methods.
