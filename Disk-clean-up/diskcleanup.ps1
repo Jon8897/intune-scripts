@@ -42,3 +42,13 @@ try {
     # Display a popup message to the user indicating that the cleanup is complete
     $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
 }
+catch {
+    # Write an error log entry if any error occurs
+    $ErrorMessage = $_.Exception.Message
+    $DateTime = Get-Date
+    $ErrorLogEntry = "$DateTime - Error occurred during Disk Cleanup:`r`n$ErrorMessage`r`n"
+    Add-Content -Path $LogPath -Value $ErrorLogEntry
+
+    # Display a popup message to the user indicating the error
+    $CleanupOptions.Popup("An error occurred during Disk Cleanup. Please check the log file for details.", 0, "Disk Cleanup Error", 16)
+}
