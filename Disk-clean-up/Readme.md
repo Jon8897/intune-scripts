@@ -13,7 +13,7 @@ This script performs disk cleanup by removing unnecessary files from your system
 2. Navigate to the directory where the script is located.
 3. Run the script by executing the following command: .\diskcleanup.ps1
 4. Follow the on-screen prompts and wait for the disk cleanup to complete.
-5. After the cleanup is finished, a log file will be created in your temporary directory with the name `DiskCleanup.log`. You can refer to this file for details about the cleanup operation.
+5. After the cleanup is finished, a log file will be created in your directory with the name `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log`. You can refer to this file for details about the cleanup operation.
 
 ## Cleanup Flags
 
