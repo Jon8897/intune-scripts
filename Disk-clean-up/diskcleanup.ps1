@@ -1,25 +1,3 @@
-# Register DISM DLLs
-$WinDir = $env:windir
-$SysNativeFolder = Join-Path -Path $WinDir -ChildPath 'SysNative'
-$System32Folder = Join-Path -Path $WinDir -ChildPath 'System32'
-
-# Register the DLLs from the SysNative folder
-$DismDLLs = @('DismCore.dll', 'DismCorePS.dll', 'DismHost.exe', 'DismProv.dll')
-$DismDLLs | ForEach-Object {
-    $DllPath = Join-Path -Path $SysNativeFolder -ChildPath $_
-    if (Test-Path $DllPath) {
-        regsvr32 /s $DllPath
-    }
-}
-
-# Register the DLLs from the System32 folder
-$DismDLLs | ForEach-Object {
-    $DllPath = Join-Path -Path $System32Folder -ChildPath $_
-    if (Test-Path $DllPath) {
-        regsvr32 /s $DllPath
-    }
-}
-
 # Set up the cleanup flags
 $CleanupFlags = @{
     "DownloadedProgramFiles" = $True
