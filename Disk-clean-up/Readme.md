@@ -37,3 +37,17 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 - 05/22/2023 17:07:12 - Disk Cleanup started.
   - so far has been successful
+
+##### ISSUES #####
+
+- Program ran said it was successfully but all my files are still full and nothing has been deleted.
+
+1. Permission issues: Ensure that the user running the script has sufficient permissions to delete files/folders in the specified locations.
+
+2. Folder paths: Verify that the folder paths specified in the cleanup flags ($CleanupFlags) are correct for your system. You can update them if necessary.
+
+3. Silent errors: It's possible that errors are occurring during the cleanup process, but the -ErrorAction SilentlyContinue parameter is suppressing the error messages. You can remove this parameter temporarily to see if any error messages are displayed.
+
+4. Confirmation prompts: If there are confirmation prompts during the deletion process, the script may be waiting for user input, causing it to appear as if no cleanup is being performed. To bypass confirmation prompts, you can use the -Confirm:$false parameter with the Remove-Item cmdlet.
+
+- I recommend checking the permissions, verifying the folder paths, and removing the -ErrorAction parameter to troubleshoot the issue further. Additionally, review the log file (C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log) to see if any errors or relevant information are logged.
