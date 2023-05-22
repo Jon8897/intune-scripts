@@ -37,6 +37,14 @@ To use this script, save the code to a PowerShell script file (e.g., WindowsUpda
 
 This script can be used in an Intune environment without the need to install additional modules. To use it in Intune, upload the script to Intune and create a PowerShell script deployment policy. When the policy is applied to a device, the script will run, and the log file will be uploaded to Intune for review.
 
+## Intune 
+
+I have connected this to the Intune scripts section and the results are as shown:
+
+### device| scripts:
+
+<img src="imgs/device-scripts.png">
+
 ## Issues
 
 #### 05/05/2023 ####
@@ -46,7 +54,7 @@ This script can be used in an Intune environment without the need to install add
 
 - ~~To fix these issues, you could remove the MaxUpdatesPerDownload parameter and modify the code to write to a location that the user running the script has permission to access.~~
 
-- Runs and works issue is the format of log date and time show after update been made
+- ~~ Runs and works issue is the format of log date and time show after update been made ~~
 
 ## Usage
 To use this script, follow these steps:
