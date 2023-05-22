@@ -29,39 +29,19 @@ The script uses the following cleanup flags to determine which files to remove. 
 
 ## Troubleshooting
 
-The error message you encountered indicates that the COM class factory for the component with CLSID {00000000-0000-0000-0000-000000000000} could not be retrieved. This error is typically caused by the component not being registered on your system.
+The error message you received indicates that the COM class factory for the component with CLSID {00000000-0000-0000-0000-000000000000} failed to retrieve because it is not registered. This error is typically caused by a missing or improperly registered component.
 
-In the case of the Disk Cleanup script using the DISM (Deployment Image Servicing and Management) tool, the COM component is required for performing the cleanup operations.
+In your case, it seems that the required COM component for Disk Cleanup is not registered on your system. This could be due to various reasons, such as a corrupted installation or missing system files.
 
 To resolve this issue, you can try the following steps:
 
-1. Make sure you are running the script on a Windows operating system.
+1. Open an elevated Command Prompt by right-clicking on the Command Prompt icon and selecting "Run as administrator."
 2. Open an elevated PowerShell session by right-clicking on PowerShell and selecting "Run as administrator".
-3. Check if the necessary DLLs (Dynamic-Link Libraries) for DISM are registered correctly by running the following commands:
 <pre>
-# Register DISM DLLs
-$WinDir = $env:windir
-$SysNativeFolder = Join-Path -Path $WinDir -ChildPath 'SysNative'
-$System32Folder = Join-Path -Path $WinDir -ChildPath 'System32'
-
-# Register the DLLs from the SysNative folder
-$DismDLLs = @('DismCore.dll', 'DismCorePS.dll', 'DismHost.exe', 'DismProv.dll')
-$DismDLLs | ForEach-Object {
-    $DllPath = Join-Path -Path $SysNativeFolder -ChildPath $_
-    if (Test-Path $DllPath) {
-        regsvr32 /s $DllPath
-    }
-}
-
-# Register the DLLs from the System32 folder
-$DismDLLs | ForEach-Object {
-    $DllPath = Join-Path -Path $System32Folder -ChildPath $_
-    if (Test-Path $DllPath) {
-        regsvr32 /s $DllPath
-    }
-}
+regsvr32 /s DismCore.dll
+regsvr32 /s DismCorePS.dll
+regsvr32 /s DismHost.exe
+regsvr32 /s DismProv.dll
 </pre>
-
-4. After running the above commands, try running the Disk Cleanup script again to see if the error is resolved.
-
-If the issue persists, it's possible that there may be other underlying issues with the DISM component or your system configuration. In such cases, you may need to troubleshoot further or consider alternative disk cleanup methods.
+3. After running the commands, restart your computer to ensure the changes take effect.
+4. Once your system has restarted, try running the Disk Cleanup script again to see if the issue is resolved.
