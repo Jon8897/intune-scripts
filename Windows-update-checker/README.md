@@ -41,9 +41,17 @@ This script can be used in an Intune environment without the need to install add
 
 I have connected this to the Intune scripts section and the results are as shown:
 
-### device| scripts:
+### device | scripts:
 
 <img src="imgs/device-scripts.png">
+
+### Status:
+
+<img src="imgs/windows-update-checker-status.png">
+
+### Results
+
+<img src="imgs/update-checker-results.png">
 
 ## Issues
 
