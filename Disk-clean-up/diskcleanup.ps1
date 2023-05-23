@@ -4,7 +4,7 @@ $CleanupFlags = @{
     "TemporaryInternetFiles" = "$env:USERPROFILE\TemporaryInternetFiles"
     "Thumbnails" = "$env:USERPROFILE"
     "RecycleBin" = "$env:USERPROFILE\Recycle Bin"
-    "TemporaryFiles" = "$env:USERPROFILE\AppData\Local\Temp"
+    "TemporaryFiles" = "$env:USERPROFILE\JONATH~1.AST\AppData\Local\Temp"
     "DeliveryOptimizationFiles" = "$env:USERPROFILE\DeliveryOptimizationFiles"
     "SetupLogFiles" = "$env:USERPROFILE\SetupLogFiles"
 }
