@@ -31,7 +31,7 @@ $CleanupFolders.Keys | ForEach-Object {
 
     if (Test-Path $folderPath) {
         Write-Host "$(Get-Date) - Folder $folderName exists. Running cleanup..."
-        Clean-Item -Path $folderPath -Recurse -Force
+        Remove-Item -Path $folderPath -Recurse -Force
         Write-Host "$(Get-Date) - Cleanup of folder $folderName completed."
     } else {
         Write-Host "$(Get-Date) - Folder $folderName does not exist."
