@@ -27,6 +27,9 @@ try {
         if ($CleanupFlags[$flag]) {
             Write-Host "Cleaning up $flag"
             $Folder = Join-Path -Path $env:USERPROFILE -ChildPath $flag
+            if (-not (Test-Path $Folder)) {
+                $Folder = Join-Path -Path [System.Environment]::GetFolderPath("CommonProgramFiles") -ChildPath $flag
+            }
             if (Test-Path $Folder) {
                 try {
                     Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
