@@ -56,8 +56,12 @@ The script uses the following cleanup flags to determine which files to remove. 
     - 05/23/2023 11:52:44 - Folder DownloadedProgramFiles does not exist.
     - 05/23/2023 11:52:44 - Folder TemporaryInternetFiles does not exist.
     - 05/23/2023 11:52:44 - Folder DeliveryOptimizationFiles does not exist.
+    - 05/23/2023 14:48:22 - Error occurred during Disk Cleanup:
+      Cannot bind argument to parameter 'Path' because it is null. 
+      this is the message in the log i get 
    </pre>
- - Need to fix path issue 
+ - Need to fix path issue
+
 
 ##### ISSUES #####
 
