@@ -46,9 +46,22 @@ The script uses the following cleanup flags to determine which files to remove. 
   - Need to figure out issues
 
 - 23/05/2023 - Disk cleanup Logging Errors
- - Errors are now being logged to see what issues I am facing
+ - Errors are now being logged:
+   <pre>
+    - 05/23/2023 11:52:44 - Disk Cleanup started.
+    - 05/23/2023 11:52:44 - Folder TemporaryFiles does not exist.
+    - 05/23/2023 11:52:44 - Folder SetupLogFiles does not exist.
+    - 05/23/2023 11:52:44 - Folder Thumbnails does not exist.
+    - 05/23/2023 11:52:44 - Folder RecycleBin does not exist.
+    - 05/23/2023 11:52:44 - Folder DownloadedProgramFiles does not exist.
+    - 05/23/2023 11:52:44 - Folder TemporaryInternetFiles does not exist.
+    - 05/23/2023 11:52:44 - Folder DeliveryOptimizationFiles does not exist.
+   </pre>
+ - Need to fix path issue 
 
 ##### ISSUES #####
+
+- Path is not being found to delete the files for the disk clean up.
 
 - Program ran said it was successfully but all my files are still full and nothing has been deleted.
 
