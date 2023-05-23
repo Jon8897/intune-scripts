@@ -31,11 +31,11 @@ try {
                 try {
                     Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
                     if (-not (Test-Path $Folder)) {
-                        $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                        $LogEntry = "$DateTime - $($flag) cleaned up.`r`n"
                         Add-Content -Path $LogPath -Value $LogEntry
                     }
                     else {
-                        $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                        $LogEntry = "$DateTime - Error occurred while cleaning up $($flag).`r`n"
                         Add-Content -Path $LogPath -Value $LogEntry
                     }
                 }
@@ -45,8 +45,13 @@ try {
                     Add-Content -Path $LogPath -Value $LogEntry
                 }
             }
+            else {
+                $LogEntry = "$DateTime - Folder $($flag) does not exist.`r`n"
+                Add-Content -Path $LogPath -Value $LogEntry
+            }
         }
     }
+
 
     # Display a popup message to the user indicating that the cleanup is complete
     $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
