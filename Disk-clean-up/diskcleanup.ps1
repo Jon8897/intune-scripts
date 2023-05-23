@@ -51,7 +51,7 @@ try {
                 continue
             }
             try {
-                Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
+                Remove-Item -Path $Folder -Recurse -Force -ErrorAction SilentlyContinue
                 if (-not (Test-Path $Folder)) {
                     Write-Host "$flag cleaned up."
                     $LogEntry = "$DateTime - $flag cleaned up.`r`n"
