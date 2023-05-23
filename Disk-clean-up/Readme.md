@@ -36,7 +36,8 @@ The script uses the following cleanup flags to determine which files to remove. 
 ###### 22/05/2023 ######
 
 - 05/22/2023 17:07:12 - Disk Cleanup started.
-  - so far has been successful
+  - Checked pc for results and nothing was cleaned 
+  - Need to figure out issues
 
 ##### ISSUES #####
 
