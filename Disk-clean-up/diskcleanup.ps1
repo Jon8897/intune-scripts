@@ -1,12 +1,12 @@
 # Define the folders to be cleaned up and their corresponding paths
 $CleanupFolders = @{
-    "DownloadedProgramFiles" = [Environment]::GetFolderPath("CommonProgramFiles")
-    "TemporaryInternetFiles" = [Environment]::GetFolderPath("InternetCache")
-    "Thumbnails" = [Environment]::GetFolderPath("CommonPictures")
+    "DownloadedProgramFiles" = [Environment]::GetFolderPath("CommonProgramFiles") + "\$env:CommonProgramFiles"
+    "TemporaryInternetFiles" = [Environment]::GetFolderPath("InternetCache") + "\$env:InternetCache"
+    "Thumbnails" = [Environment]::GetFolderPath("CommonPictures") + "\$env:RecycleBin"
     "RecycleBin" = [Environment]::GetFolderPath("Desktop") + "\$env:RecycleBin"
-    "TemporaryFiles" = [Environment]::GetFolderPath("Temp")
-    "DeliveryOptimizationFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\Microsoft\Windows\DeliveryOptimization"
-    "SetupLogFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\Microsoft\Windows\Setup\Logs"
+    "TemporaryFiles" = [Environment]::GetFolderPath("Temp") + "\$env:Temp"
+    "DeliveryOptimizationFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\$env:DeliveryOptimization"
+    "SetupLogFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\$env:Logs"
 }
 
 # Define the cleanup flags
