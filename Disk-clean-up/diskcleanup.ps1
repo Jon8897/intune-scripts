@@ -1,12 +1,12 @@
 # Set up the cleanup flags
 $CleanupFlags = @{
-    "DownloadedProgramFiles" = "$env:USERPROFILE\DownloadedProgramFiles"
-    "TemporaryInternetFiles" = "$env:USERPROFILE\TemporaryInternetFiles"
-    "Thumbnails" = "$env:USERPROFILE"
-    "RecycleBin" = "$env:USERPROFILE\Recycle Bin"
-    "TemporaryFiles" = "$env:USERPROFILE\JONATH~1.AST\AppData\Local\Temp"
-    "DeliveryOptimizationFiles" = "$env:USERPROFILE\DeliveryOptimizationFiles"
-    "SetupLogFiles" = "$env:USERPROFILE\SetupLogFiles"
+    "DownloadedProgramFiles" = "$env:USERPROFILE\Downloads\Program Files"
+    "TemporaryInternetFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Temporary Internet Files"
+    "Thumbnails" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Explorer\Thumbnails"
+    "RecycleBin" = "$env:USERPROFILE\RecycleBin"
+    "TemporaryFiles" = "$env:USERPROFILE\AppData\Local\Temp"
+    "DeliveryOptimizationFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\DeliveryOptimization"
+    "SetupLogFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Setup\Setup Log Files"
 }
 
 # Display a popup message to the user indicating that the cleanup is in progress
