@@ -26,9 +26,9 @@ try {
     foreach ($flag in $CleanupFlags.Keys) {
         if ($CleanupFlags[$flag]) {
             Write-Host "Cleaning up $flag"
-            $Folder = Join-Path -Path $env:USERPROFILE -ChildPath $flag
+            $Folder = $env:USERPROFILE + "\" + $flag
             if (-not (Test-Path $Folder)) {
-                $Folder = Join-Path -Path [System.Environment]::GetFolderPath("CommonProgramFiles") -ChildPath $flag
+                $Folder = Join-Path -Path ([System.IO.Path]::Combine([System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonProgramFiles))) -ChildPath $flag
             }
             if (Test-Path $Folder) {
                 try {
@@ -54,7 +54,6 @@ try {
             }
         }
     }
-
 
     # Display a popup message to the user indicating that the cleanup is complete
     $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
