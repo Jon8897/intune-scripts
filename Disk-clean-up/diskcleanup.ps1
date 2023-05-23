@@ -28,44 +28,44 @@ try {
     $LogEntry = "$DateTime - Disk Cleanup started.`r`n"
     Add-Content -Path $LogPath -Value $LogEntry
 
-   # Clean up each specified folder and log the result
-foreach ($flag in $CleanupFlags.Keys) {
-    if ($CleanupFlags[$flag]) {
-        Write-Host "Cleaning up $flag"
-        $Folder = $CleanupFolders[$flag]
-        if ([string]::IsNullOrWhiteSpace($Folder)) {
-            Write-Host "Folder path for $flag is empty."
-            $LogEntry = "$DateTime - Folder path for $flag is empty.`r`n"
-            Add-Content -Path $LogPath -Value $LogEntry
-            continue
-        }
-        if (-not (Test-Path $Folder)) {
-            Write-Host "Folder $flag does not exist."
-            $LogEntry = "$DateTime - Folder $flag does not exist.`r`n"
-            Add-Content -Path $LogPath -Value $LogEntry
-            continue
-        }
-        try {
-            Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
+    # Clean up each specified folder and log the result
+    foreach ($flag in $CleanupFlags.Keys) {
+        if ($CleanupFlags[$flag]) {
+            Write-Host "Cleaning up $flag"
+            $Folder = $CleanupFolders[$flag]
+            if ([string]::IsNullOrWhiteSpace($Folder)) {
+                Write-Host "Folder path for $flag is empty."
+                $LogEntry = "$DateTime - Folder path for $flag is empty.`r`n"
+                Add-Content -Path $LogPath -Value $LogEntry
+                continue
+            }
             if (-not (Test-Path $Folder)) {
-                Write-Host "$flag cleaned up."
-                $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                Write-Host "Folder $flag does not exist."
+                $LogEntry = "$DateTime - Folder $flag does not exist.`r`n"
+                Add-Content -Path $LogPath -Value $LogEntry
+                continue
+            }
+            try {
+                Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
+                if (-not (Test-Path $Folder)) {
+                    Write-Host "$flag cleaned up."
+                    $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                    Add-Content -Path $LogPath -Value $LogEntry
+                }
+                else {
+                    Write-Host "Error occurred while cleaning up $flag."
+                    $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                    Add-Content -Path $LogPath -Value $LogEntry
+                }
+            }
+            catch {
+                $ErrorMessage = $_.Exception.Message
+                Write-Host "Error occurred while cleaning up $($flag): $ErrorMessage"
+                $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
                 Add-Content -Path $LogPath -Value $LogEntry
             }
-            else {
-                Write-Host "Error occurred while cleaning up $flag."
-                $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
-                Add-Content -Path $LogPath -Value $LogEntry
-            }
-        }
-        catch {
-            $ErrorMessage = $_.Exception.Message
-            Write-Host "Error occurred while cleaning up $($flag): $ErrorMessage"
-            $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
-            Add-Content -Path $LogPath -Value $LogEntry
         }
     }
-}
 
     # Display a popup message to the user indicating that the cleanup is complete
     $CleanupOptions = New-Object -ComObject "WScript.Shell"
