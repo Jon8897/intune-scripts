@@ -15,26 +15,46 @@ $CleanupFlags = @{
     "RemoveOldUpdates" = $true
 }
 
-# Perform cleanup for each specified folder
-$CleanupFolders.Keys | ForEach-Object {
-    $folderName = $_
-    $folderPath = $CleanupFolders[$folderName]
+# Clean up each specified folder and log the result
+foreach ($folder in $CleanupFolders.GetEnumerator()) {
+    $flag = $folder.Key
+    $folderPath = $folder.Value
 
-    Write-Host "$(Get-Date) - Disk Cleanup started."
-    Write-Host "Folder Name: $folderName"
+    Write-Host "Folder Name: $flag"
     Write-Host "Folder Path: $folderPath"
 
-    if ($folderPath -eq $null) {
-        Write-Host "Error: Folder path is null for $folderName"
+    if ([string]::IsNullOrWhiteSpace($folderPath)) {
+        Write-Host "Folder path is empty."
+        $LogEntry = "$DateTime - Folder $flag path is empty.`r`n"
+        Add-Content -Path $LogPath -Value $LogEntry
         continue
     }
 
-    if (Test-Path $folderPath) {
-        Write-Host "$(Get-Date) - Folder $folderName exists. Running cleanup..."
-        Remove-Item -Path $folderPath -Recurse -Force
-        Write-Host "$(Get-Date) - Cleanup of folder $folderName completed."
-    } else {
-        Write-Host "$(Get-Date) - Folder $folderName does not exist."
+    if (-not (Test-Path $folderPath)) {
+        Write-Host "Folder $flag does not exist."
+        $LogEntry = "$DateTime - Folder $flag does not exist.`r`n"
+        Add-Content -Path $LogPath -Value $LogEntry
+        continue
+    }
+
+    try {
+        Remove-Item -Path $folderPath -Recurse -Force -ErrorAction Stop
+        if (-not (Test-Path $folderPath)) {
+            Write-Host "Cleanup of folder $flag completed."
+            $LogEntry = "$DateTime - Cleanup of folder $flag completed.`r`n"
+            Add-Content -Path $LogPath -Value $LogEntry
+        }
+        else {
+            Write-Host "Error occurred while cleaning up $flag."
+            $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+            Add-Content -Path $LogPath -Value $LogEntry
+        }
+    }
+    catch {
+        $ErrorMessage = $_.Exception.Message
+        Write-Host "Error occurred while cleaning up $($flag): $ErrorMessage"
+        $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
+        Add-Content -Path $LogPath -Value $LogEntry
     }
 }
 
