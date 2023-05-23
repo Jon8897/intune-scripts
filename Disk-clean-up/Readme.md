@@ -7,6 +7,12 @@ This script performs disk cleanup by removing unnecessary files from your system
 - Windows operating system
 - PowerShell
 
+### Where to find Logs
+
+<pre>
+C:\ProgramData\Microsoft\IntuneManagementExtension\Logs
+</pre>
+
 ## Usage
 
 1. Open PowerShell.
