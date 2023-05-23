@@ -14,7 +14,7 @@ $CleanupOptions = New-Object -ComObject "WScript.Shell"
 $CleanupOptions.Popup("Performing Disk Cleanup. Please wait...", 0, "Disk Cleanup", 64)
 
 # Set the log file path
-$LogPath = "C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log"
+$LogPath = "$env:ProgramData\Microsoft\IntuneManagementExtension\Logs\DiskCleanup.log"
 
 try {
     # Create or append to the log file
