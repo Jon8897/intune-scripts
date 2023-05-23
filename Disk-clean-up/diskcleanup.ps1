@@ -21,6 +21,14 @@ $CleanupFolders.Keys | ForEach-Object {
     $folderPath = $CleanupFolders[$folderName]
 
     Write-Host "$(Get-Date) - Disk Cleanup started."
+    Write-Host "Folder Name: $folderName"
+    Write-Host "Folder Path: $folderPath"
+
+    if ($folderPath -eq $null) {
+        Write-Host "Error: Folder path is null for $folderName"
+        continue
+    }
+
     if (Test-Path $folderPath) {
         Write-Host "$(Get-Date) - Folder $folderName exists. Running cleanup..."
         Clean-Item -Path $folderPath -Recurse -Force
