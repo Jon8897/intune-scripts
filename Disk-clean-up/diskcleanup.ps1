@@ -51,15 +51,15 @@ try {
                 continue
             }
             try {
-                Remove-Item -Path $Folder -Recurse -Force -ErrorAction SilentlyContinue
-                if (-not (Test-Path $Folder)) {
+                Remove-Item -Path $Folder -Recurse -Force -ErrorAction SilentlyContinue -ErrorVariable RemoveError > $null
+                if (-not $RemoveError) {
                     Write-Host "$flag cleaned up."
                     $LogEntry = "$DateTime - $flag cleaned up.`r`n"
                     Add-Content -Path $LogPath -Value $LogEntry
                 }
                 else {
-                    Write-Host "Error occurred while cleaning up $flag."
-                    $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                    Write-Host "Error occurred while cleaning up $($flag): $RemoveError"
+                    $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $RemoveError`r`n"
                     Add-Content -Path $LogPath -Value $LogEntry
                 }
             }
