@@ -34,3 +34,16 @@ if ($updates) {
     # Write the log message to the log file
     Add-Content -Path $logFile -Value $logMessage
 }
+
+# Import the ScheduledTasks module
+Import-Module ScheduledTasks
+
+# Define the schedule settings
+$trigger = New-ScheduledTaskTrigger -Weekly -At "08:00 AM" -DaysOfWeek Monday
+$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File `"$scriptPath`""
+
+# Create the scheduled task
+Register-ScheduledTask -TaskName "WindowsUpdateCheckScheduler" -Trigger $trigger -Action $action -RunLevel Highest -User "SYSTEM"
+
+# Display success message
+Write-Host "Scheduled task created successfully."
