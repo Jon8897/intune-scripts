@@ -1,12 +1,12 @@
 # Set up the cleanup flags
 $CleanupFlags = @{
-    "DownloadedProgramFiles" = $True
-    "TemporaryInternetFiles" = $True
-    "Thumbnails" = $True
-    "RecycleBin" = $True
-    "TemporaryFiles" = $True
-    "DeliveryOptimizationFiles" = $True
-    "SetupLogFiles" = $True
+    "DownloadedProgramFiles" = "C:\Path\to\DownloadedProgramFiles"
+    "TemporaryInternetFiles" = "C:\Path\to\TemporaryInternetFiles"
+    "Thumbnails" = "C:\Path\to\Thumbnails"
+    "RecycleBin" = "C:\Path\to\RecycleBin"
+    "TemporaryFiles" = "C:\Path\to\TemporaryFiles"
+    "DeliveryOptimizationFiles" = "C:\Path\to\DeliveryOptimizationFiles"
+    "SetupLogFiles" = "C:\Path\to\SetupLogFiles"
 }
 
 # Display a popup message to the user indicating that the cleanup is in progress
