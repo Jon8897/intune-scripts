@@ -28,13 +28,20 @@ try {
             Write-Host "Cleaning up $flag"
             $Folder = Join-Path -Path $env:USERPROFILE -ChildPath $flag
             if (Test-Path $Folder) {
-                Remove-Item -Path $Folder -Recurse -Force -ErrorAction SilentlyContinue
-                if (-not (Test-Path $Folder)) {
-                    $LogEntry = "$DateTime - $flag cleaned up.`r`n"
-                    Add-Content -Path $LogPath -Value $LogEntry
+                try {
+                    Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
+                    if (-not (Test-Path $Folder)) {
+                        $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                        Add-Content -Path $LogPath -Value $LogEntry
+                    }
+                    else {
+                        $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                        Add-Content -Path $LogPath -Value $LogEntry
+                    }
                 }
-                else {
-                    $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
+                catch {
+                    $ErrorMessage = $_.Exception.Message
+                    $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
                     Add-Content -Path $LogPath -Value $LogEntry
                 }
             }
