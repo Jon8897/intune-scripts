@@ -1,12 +1,33 @@
-# Set up the cleanup flags
+# Define the folders to be cleaned up and their corresponding paths
+$CleanupFolders = @{
+    "DownloadedProgramFiles" = [Environment]::GetFolderPath("CommonProgramFiles")
+    "TemporaryInternetFiles" = [Environment]::GetFolderPath("InternetCache")
+    "Thumbnails" = [Environment]::GetFolderPath("CommonPictures")
+    "RecycleBin" = [Environment]::GetFolderPath("Recycle")
+    "TemporaryFiles" = [Environment]::GetFolderPath("Temp")
+    "DeliveryOptimizationFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\Microsoft\Windows\DeliveryOptimization"
+    "SetupLogFiles" = [Environment]::GetFolderPath("LocalApplicationData") + "\Microsoft\Windows\Setup\Logs"
+}
+
+# Define the cleanup flags
 $CleanupFlags = @{
-    "DownloadedProgramFiles" = "$env:USERPROFILE\Downloads\Program Files"
-    "TemporaryInternetFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Temporary Internet Files"
-    "Thumbnails" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Explorer\Thumbnails"
-    "RecycleBin" = "$env:USERPROFILE\RecycleBin"
-    "TemporaryFiles" = "$env:USERPROFILE\AppData\Local\Temp"
-    "DeliveryOptimizationFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\DeliveryOptimization"
-    "SetupLogFiles" = "$env:USERPROFILE\AppData\Local\Microsoft\Windows\Setup\Setup Log Files"
+    "CompressOldFiles" = $false
+    "RemoveOldUpdates" = $true
+}
+
+# Perform cleanup for each specified folder
+$CleanupFolders.Keys | ForEach-Object {
+    $folderName = $_
+    $folderPath = $CleanupFolders[$folderName]
+
+    Write-Host "$(Get-Date) - Disk Cleanup started."
+    if (Test-Path $folderPath) {
+        Write-Host "$(Get-Date) - Folder $folderName exists. Running cleanup..."
+        Clean-Item -Path $folderPath -Recurse -Force
+        Write-Host "$(Get-Date) - Cleanup of folder $folderName completed."
+    } else {
+        Write-Host "$(Get-Date) - Folder $folderName does not exist."
+    }
 }
 
 # Display a popup message to the user indicating that the cleanup is in progress
