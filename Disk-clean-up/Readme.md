@@ -62,6 +62,8 @@ The script uses the following cleanup flags to determine which files to remove. 
    </pre>
  - Need to fix path issue
 
+ ### Need to test through Intune ###
+
 
 ##### ISSUES #####
 
