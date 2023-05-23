@@ -55,36 +55,37 @@ try {
     foreach ($flag in $CleanupFlags.Keys) {
         if ($CleanupFlags[$flag]) {
             Write-Host "Cleaning up $flag"
-            $Folder = $env:USERPROFILE + "\" + $flag
+            $Folder = $CleanupFolders[$flag]
             if (-not (Test-Path $Folder)) {
-                $Folder = Join-Path -Path ([System.IO.Path]::Combine([System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::CommonProgramFiles))) -ChildPath $flag
+                Write-Host "Folder $flag does not exist."
+                $LogEntry = "$DateTime - Folder $flag does not exist.`r`n"
+                Add-Content -Path $LogPath -Value $LogEntry
+                continue
             }
-            if (Test-Path $Folder) {
-                try {
-                    Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
-                    if (-not (Test-Path $Folder)) {
-                        $LogEntry = "$DateTime - $($flag) cleaned up.`r`n"
-                        Add-Content -Path $LogPath -Value $LogEntry
-                    }
-                    else {
-                        $LogEntry = "$DateTime - Error occurred while cleaning up $($flag).`r`n"
-                        Add-Content -Path $LogPath -Value $LogEntry
-                    }
+            try {
+                Remove-Item -Path $Folder -Recurse -Force -ErrorAction Stop
+                if (-not (Test-Path $Folder)) {
+                    Write-Host "$flag cleaned up."
+                    $LogEntry = "$DateTime - $flag cleaned up.`r`n"
+                    Add-Content -Path $LogPath -Value $LogEntry
                 }
-                catch {
-                    $ErrorMessage = $_.Exception.Message
-                    $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
+                else {
+                    Write-Host "Error occurred while cleaning up $flag."
+                    $LogEntry = "$DateTime - Error occurred while cleaning up $flag.`r`n"
                     Add-Content -Path $LogPath -Value $LogEntry
                 }
             }
-            else {
-                $LogEntry = "$DateTime - Folder $($flag) does not exist.`r`n"
+            catch {
+                $ErrorMessage = $_.Exception.Message
+                Write-Host "Error occurred while cleaning up $($flag): $ErrorMessage"
+                $LogEntry = "$DateTime - Error occurred while cleaning up $($flag): $ErrorMessage`r`n"
                 Add-Content -Path $LogPath -Value $LogEntry
             }
         }
     }
 
     # Display a popup message to the user indicating that the cleanup is complete
+    $CleanupOptions = New-Object -ComObject "WScript.Shell"
     $CleanupOptions.Popup("Disk Cleanup completed successfully.", 0, "Disk Cleanup", 64)
 }
 catch {
